@@ -1,0 +1,1 @@
+FROM falcosecurity/falco:0.26.1

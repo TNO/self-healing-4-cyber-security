@@ -1,0 +1,24 @@
+version: "2.1"
+
+services:
+  syslog-ng:
+    network_mode: host
+    image: ci.tno.nl/self-healing/host/syslog-ng:master
+    volumes:
+      - ./syslog-server/logs.txt:/var/log/syslog-ng/logs.txt
+      - ./syslog-server/syslog-ng.conf:/etc/syslog-ng/syslog-ng.conf 
+  falco:
+    network_mode: host
+    privileged: true
+    env_file: falco_detector/variables.env
+    image: ci.tno.nl/self-healing/host/falco:master
+    volumes:
+      - /dev:/host/dev:ro
+      - /proc:/host/proc:ro
+      - /boot:/host/boot:ro
+      - /lib/modules:/host/lib/modules:ro
+      - /usr:/host/usr:ro
+      - /etc:/host/etc:ro
+      - ./falco_detector/falco:/etc/falco/:ro
+      - ./falco_detector/syslog-ng:/etc/syslog-ng:ro
+      - ./falco_detector/docker-entrypoint.sh:/docker-entrypoint.sh

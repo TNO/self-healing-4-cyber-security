@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose.yml
+    kompose.version: 1.21.0 (992df58d8)
+  creationTimestamp: null
+  labels:
+    app: bastion
+  name: bastion-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bastion
+  strategy: { }
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -f docker-compose.yml
+        kompose.version: 1.21.0 (992df58d8)
+      creationTimestamp: null
+      labels:
+        app: bastion
+        name: bastion-deployment
+        id: bastion
+    spec:
+      containers:
+        - image: ci.tno.nl/self-healing/web-application/authentication-bastion:master
+          imagePullPolicy: ""
+          name: bastion-deployment
+          resources: { }
+      restartPolicy: Always
+      serviceAccountName: ""
+      volumes: null
+status: { }

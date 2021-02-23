@@ -1,0 +1,9 @@
+version: "3"
+
+services:
+  syslog-ng:
+    hostname: "sh_syslogger"
+    image: ci.tno.nl/self-healing/host/syslog-ng:latest
+    ports:
+      - "514:514/udp"
+      - "601:601"

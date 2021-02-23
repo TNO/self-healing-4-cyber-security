@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose.yml
+    kompose.version: 1.21.0 (992df58d8)
+  creationTimestamp: null
+  labels:
+    app: channel-frequency-monitor
+  name: channel-frequency-monitor-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: channel-frequency-monitor
+  strategy: { }
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -f docker-compose.yml
+        kompose.version: 1.21.0 (992df58d8)
+      creationTimestamp: null
+      labels:
+        app: channel-frequency-monitor
+        name: channel-frequency-monitor-deployment
+        id: channel-frequency-monitor
+    spec:
+      containers:
+        - image: ci.tno.nl/self-healing/pod/channel-frequency-monitor:master
+          imagePullPolicy: ""
+          name: channel-frequency-monitor-deployment
+          resources: { }
+      restartPolicy: Always
+      serviceAccountName: ""
+      volumes: null
+status: { }

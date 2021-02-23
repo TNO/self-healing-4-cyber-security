@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose.yml
+    kompose.version: 1.21.0 (992df58d8)
+  creationTimestamp: null
+  labels:
+    app: lymphocyte
+  name: lymphocyte-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: lymphocyte
+  strategy: { }
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -f docker-compose.yml
+        kompose.version: 1.21.0 (992df58d8)
+      creationTimestamp: null
+      labels:
+        app: lymphocyte
+        name: lymphocyte-deployment
+        id: lymphocyte
+    spec:
+      containers:
+        - image: ci.tno.nl/self-healing/pod/lymphocyte:master
+          imagePullPolicy: ""
+          name: lymphocyte-deployment
+          resources: { }
+          env:
+            - name: HDDP_HOST
+              value: "hddp:80"
+            - name: MONGODB_HOST
+              value: "mongo"
+            - name: MONGODB_PORT
+              value: "27017"
+      restartPolicy: Always
+      serviceAccountName: ""
+      volumes: null
+status: { }

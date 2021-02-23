@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  backend:
+    build: .
+    environment:
+      - PYTHONUNBUFFERED=1
+      - DOCKER_HOST=172.17.0.1:2375
+    ports:
+    - 80:5000

@@ -1,0 +1,4 @@
+aiodns==2.0.0
+aiohttp==3.5.4
+asyncssh==1.17.0
+cchardet==2.1.4
